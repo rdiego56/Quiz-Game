@@ -1,4 +1,15 @@
 var startButton = document.querySelector("#start-button");
+var timerElement = document.querySelector("timer-count");
+var win = document.querySelector(".win");
+var lose = document.querySelector(".lose");
+
+
+var numBlanks = 0;
+var timer;
+var timerCount;
+var winCounter = 0;
+var loseCounter = 0;
+var isWin = false;
 
 var questions = [
     {
@@ -52,12 +63,43 @@ var questions = [
         answer: "4"
     },
     {
+        question: "Who gave Kakashi the sharingan",
+        choices: {
+            1: "Obito",
+            2: "Might Guy",
+            3: "Naruto",
+            4: "Kisame",
+        },
+        answer: "1"
         
-    }
+    },
 ]
+
+var Code = "";
+for( var i = 0; i < questions);
+
+function startTimer() {
+    timer = setInterval(function() {
+        timerCount--;
+        timerElement.textContent = timerCount;
+        if (timerCount >=0) {
+            if(complete && timerCount >0) {
+                clearInterval(timer);
+                quizDone();
+            }
+        }
+        if (timerCount === 0) {
+            clearInterval(timer);
+            quizDone();
+        }
+    }, 1000);
+}
+
+
 
 
 startButton.addEventListener("click", function() {
     document.querySelector("#start-block").setAttribute("class","hide");
     document.querySelector("#quiz-block").setAttribute("class", "show");
-})
+});
+
