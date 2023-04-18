@@ -10,73 +10,71 @@ var timerCount;
 var winCounter = 0;
 var loseCounter = 0;
 var isWin = false;
+var currentquestionindex = 0;
 
 var questions = [
     {
         question: " Who was the first Hokage:",
-        choices: {
-            1: "Minato",
-            2:"Tobirama",
-            3:"Hashirama",
-            4:"Naruto",
-        },
+        choices: [
+            "Minato",
+            "Tobirama",
+            "Hashirama",
+            "Naruto",
+        ],
         answer: "3"
     },
     {
         question: "Which Akautski did Sakura defeat",
-        choices: {
-            1: "Sasori",
-            2: "Kakuzu",
-            3: "Black Zetsu",
-            4: "Itachi",
-        },
+        choices: [
+             "Sasori",
+             "Kakuzu",
+             "Black Zetsu",
+             "Itachi",
+        ],
         answer : "1",
     },
     {
         question: "What is the CORRECT name of the purple orb Tailed beast make",
-        choices: {
-            1: "Purple ball",
-            2: "Biju Bomb",
-            3: "Tailed beast bomb",
-            4: "Rasengan",
-        },
+        choices: [
+             "Purple ball",
+             "Biju Bomb",
+             "Tailed beast bomb",
+             "Rasengan",
+        ],
         answer: "2",
     },
     {
         question: "What chakra nature did Naruto add to his Rasengan",
-        choices: {
-            1:"Wind",
-            2:"Water",
-            3:"Lighting",
-            4:"Fire",
-        },
+        choices: [
+            "Wind",
+            "Water",
+            "Lighting",
+            "Fire",
+        ],
         answer: "1"
     },
     {
         question: "What is the name of Kakashis main jutsu",
-        choices: {
-            1: "Lightning strike",
-            2: "Kamui",
-            3: "Shadow clone",
-            4: "Chidori",
-        },
+        choices: [
+             "Lightning strike",
+             "Kamui",
+             "Shadow clone",
+             "Chidori",
+        ],
         answer: "4"
     },
     {
         question: "Who gave Kakashi the sharingan",
-        choices: {
-            1: "Obito",
-            2: "Might Guy",
-            3: "Naruto",
-            4: "Kisame",
-        },
+        choices: [
+             "Obito",
+             "Might Guy",
+             "Naruto",
+             "Kisame",
+        ],
         answer: "1"
         
     },
 ]
-
-var Code = "";
-for( var i = 0; i < questions);
 
 function startTimer() {
     timer = setInterval(function() {
@@ -95,11 +93,22 @@ function startTimer() {
     }, 1000);
 }
 
-
+function getQuestion() {
+    var currentquestion = questions[currentquestionindex];
+    for(var i = 0; i < currentquestion.choices.length; i++) { 
+        console.log(currentquestion.question)
+        console.log(currentquestion.choices[i])
+    }
+}
 
 
 startButton.addEventListener("click", function() {
     document.querySelector("#start-block").setAttribute("class","hide");
     document.querySelector("#quiz-block").setAttribute("class", "show");
+    getQuestion()
 });
 
+
+
+// funtion start quiz, inside start quiz we wnat to get the question and start the quiz
+// need fucntion to get questions 
