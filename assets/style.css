@@ -70,3 +70,19 @@ header {
     justify-content: center;
     padding: 40px;
 }
+
+h1 {
+    color: orange;
+    text-align: center;
+    padding: 20px;
+    justify-content: center;
+    margin: 15px;
+}
+
+.answers p {
+    color: orange;
+    text-align: left;
+    padding: 20px;
+    justify-content: center;
+    margin: 15px;
+}

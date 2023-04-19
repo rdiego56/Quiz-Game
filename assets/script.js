@@ -106,6 +106,7 @@ startButton.addEventListener("click", function() {
     document.querySelector("#start-block").setAttribute("class","hide");
     document.querySelector("#quiz-block").setAttribute("class", "show");
     getQuestion()
+    startTimer()
 });
 
 
