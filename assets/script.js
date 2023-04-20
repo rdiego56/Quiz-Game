@@ -95,9 +95,17 @@ function startTimer() {
 
 function getQuestion() {
     var currentquestion = questions[currentquestionindex];
+    var quizblock = document.querySelector("#quiz-block")
+    var question = document.querySelector("#Question-text") 
+    var correct = document.querySelector(".answers")
     for(var i = 0; i < currentquestion.choices.length; i++) { 
         console.log(currentquestion.question)
         console.log(currentquestion.choices[i])
+        question.textContent = currentquestion.question
+        var answers = document.createElement("p")
+        answers.textContent = currentquestion.choices[i]
+        quizblock.append(question)
+        correct.append(answers)
     }
 }
 
