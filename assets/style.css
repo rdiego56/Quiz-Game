@@ -37,8 +37,8 @@ header {
 
 .timer {
     float: right;
-    padding: 20px;
-    margin: 20px;
+    padding: 8px;
+    margin: 8px;
     color: orange;
 }
 
@@ -53,14 +53,6 @@ header {
     padding: 20px;
     margin: 15px;
 }
-/* 
-#main-game {
-    display: none;
-}
-
-#main-game.show {
-    display: block;
-} */
 
 #start-screen.hide {
     display: none;
@@ -81,8 +73,12 @@ h1 {
 
 .answers p {
     color: orange;
-    text-align: left;
+    text-align: center;
     padding: 20px;
     justify-content: center;
     margin: 15px;
 }
+/* 
+#Question-text {
+    justify-content: right;
+} */

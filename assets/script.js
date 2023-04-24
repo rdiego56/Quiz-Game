@@ -1,12 +1,12 @@
 var startButton = document.querySelector("#start-button");
-var timerElement = document.querySelector("timer-count");
+var timerElement = document.querySelector(".timer");
 var win = document.querySelector(".win");
 var lose = document.querySelector(".lose");
 
 
 var numBlanks = 0;
 var timer;
-var timerCount;
+var timerCount = 100;
 var winCounter = 0;
 var loseCounter = 0;
 var isWin = false;
@@ -87,11 +87,13 @@ function startTimer() {
             }
         }
         if (timerCount === 0) {
-            clearInterval(timer);
+            clearInterval(timerInterval);
             quizDone();
         }
     }, 1000);
 }
+
+
 
 function getQuestion() {
     var currentquestion = questions[currentquestionindex];
@@ -103,11 +105,56 @@ function getQuestion() {
         console.log(currentquestion.choices[i])
         question.textContent = currentquestion.question
         var answers = document.createElement("p")
+        answers.className = "correct-answer"
         answers.textContent = currentquestion.choices[i]
         quizblock.append(question)
         correct.append(answers)
     }
 }
+
+function checkAnswer(answer) {
+    if (answer === quizData[currentQuestionIndex].correctAnswer) {
+      // Answer is correct
+      userScore += 10;
+      feedbackEl.textContent = "Correct!";
+    } else {
+      // Answer is incorrect
+      timeLeft -= 10;
+      feedbackEl.textContent = "Wrong!";
+    }
+} 
+
+// var correctAnswer = document.querySelector(".correct-answer")
+// correctAnswer.addEventListener("click",function(event) {
+    
+    
+//     event.preventDefault()
+//     console.log(event)
+
+// function correctAnswer (questions, quizChoices, answerChoices){
+//     var answerContainer = quizChoices.querySelectorAll('answer');
+
+//     var userAnswer = '';
+//     var numCorrect = 0;
+
+//     for (var i=0; i<questions.length; i++){
+//         userAnswer = (answerContainer[i].querySelector('input[name=question'+i+']:checked')||{}).value;
+//         if(userAnswer===questions[i].correctAnswer){
+//             numCorrect++;
+//             answerContainer[i].textContent = "Correct";
+//         }
+//         else{
+//             answerContainer[i].textContent = "Wrong"
+//         }
+//     }
+
+//     submitButton.onclick = function(){
+//         correctAnswer(questions, quizChoices, answerChoices)
+//     }
+
+
+// });
+
 
 
 startButton.addEventListener("click", function() {
