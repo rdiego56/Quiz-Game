@@ -46,6 +46,12 @@ header {
     float: right;
 }
 
+#feedback {
+    color: orange;
+    
+
+}
+
  #start-block p {
     color: orange;
     justify-content: center;

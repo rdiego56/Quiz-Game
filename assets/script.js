@@ -2,7 +2,7 @@ var startButton = document.querySelector("#start-button");
 var timerElement = document.querySelector(".timer");
 var win = document.querySelector(".win");
 var lose = document.querySelector(".lose");
-
+var feedbackEl = document.querySelector("#feedback")
 
 var numBlanks = 0;
 var timer;
@@ -11,6 +11,7 @@ var winCounter = 0;
 var loseCounter = 0;
 var isWin = false;
 var currentquestionindex = 0;
+var complete = false
 
 var questions = [
     {
@@ -21,7 +22,7 @@ var questions = [
             "Hashirama",
             "Naruto",
         ],
-        answer: "3"
+        answer: "Hashirama"
     },
     {
         question: "Which Akautski did Sakura defeat",
@@ -31,7 +32,7 @@ var questions = [
              "Black Zetsu",
              "Itachi",
         ],
-        answer : "1",
+        answer : "Sasori",
     },
     {
         question: "What is the CORRECT name of the purple orb Tailed beast make",
@@ -41,7 +42,7 @@ var questions = [
              "Tailed beast bomb",
              "Rasengan",
         ],
-        answer: "2",
+        answer: "Biju Bomb",
     },
     {
         question: "What chakra nature did Naruto add to his Rasengan",
@@ -51,7 +52,7 @@ var questions = [
             "Lighting",
             "Fire",
         ],
-        answer: "1"
+        answer: "Wind"
     },
     {
         question: "What is the name of Kakashis main jutsu",
@@ -61,7 +62,7 @@ var questions = [
              "Shadow clone",
              "Chidori",
         ],
-        answer: "4"
+        answer: "Chidori"
     },
     {
         question: "Who gave Kakashi the sharingan",
@@ -71,7 +72,7 @@ var questions = [
              "Naruto",
              "Kisame",
         ],
-        answer: "1"
+        answer: "Obito"
         
     },
 ]
@@ -87,7 +88,7 @@ function startTimer() {
             }
         }
         if (timerCount === 0) {
-            clearInterval(timerInterval);
+            clearInterval(timer);
             quizDone();
         }
     }, 1000);
@@ -100,6 +101,7 @@ function getQuestion() {
     var quizblock = document.querySelector("#quiz-block")
     var question = document.querySelector("#Question-text") 
     var correct = document.querySelector(".answers")
+    correct.innerHTML = ""
     for(var i = 0; i < currentquestion.choices.length; i++) { 
         console.log(currentquestion.question)
         console.log(currentquestion.choices[i])
@@ -107,19 +109,27 @@ function getQuestion() {
         var answers = document.createElement("p")
         answers.className = "correct-answer"
         answers.textContent = currentquestion.choices[i]
-        quizblock.append(question)
-        correct.append(answers)
+        answers.onclick = function(event){
+            checkAnswer(event)
+        }
+        // quizblock.appendChild(question)
+        correct.appendChild(answers)
     }
 }
 
-function checkAnswer(answer) {
-    if (answer === quizData[currentQuestionIndex].correctAnswer) {
+function checkAnswer(event) {
+    console.log(event.target.textContent)
+    var answer = event.target.textContent
+    if (answer === questions[currentquestionindex].answer) {
+        currentquestionindex++
+        getQuestion()
       // Answer is correct
-      userScore += 10;
       feedbackEl.textContent = "Correct!";
     } else {
       // Answer is incorrect
-      timeLeft -= 10;
+      timerCount -= 10;
+      currentquestionindex++ 
+      getQuestion()
       feedbackEl.textContent = "Wrong!";
     }
 } 
