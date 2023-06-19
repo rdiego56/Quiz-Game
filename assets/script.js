@@ -2,7 +2,9 @@ var startButton = document.querySelector("#start-button");
 var timerElement = document.querySelector(".timer");
 var win = document.querySelector(".win");
 var lose = document.querySelector(".lose");
-var feedbackEl = document.querySelector("#feedback")
+var feedbackEl = document.querySelector("#feedback");
+var resetButton = document.querySelector(".reset-button");
+var submitButton = document.querySelector("#submit-button");
 
 var numBlanks = 0;
 var timer;
@@ -81,19 +83,23 @@ function startTimer() {
     timer = setInterval(function() {
         timerCount--;
         timerElement.textContent = timerCount;
-        if (timerCount >=0) {
-            if(complete && timerCount >0) {
-                clearInterval(timer);
-                quizDone();
-            }
-        }
         if (timerCount === 0) {
+            clearInterval(timer);
+            quizDone();
+        }
+        if(currentquestionindex >= questions.length){
             clearInterval(timer);
             quizDone();
         }
     }, 1000);
 }
-
+function quizDone() {
+    document.querySelector("#quiz-block").classList.remove("show");
+    document.querySelector("#quiz-block").classList.add("hide");
+    document.querySelector("#Finished").classList.remove("hide");
+    document.querySelector("#Finished").classList.add("show");
+    document.querySelector("#finalscore").textContent="highscore: " + timerCount
+}
 
 
 function getQuestion() {
@@ -120,6 +126,7 @@ function getQuestion() {
 function checkAnswer(event) {
     console.log(event.target.textContent)
     var answer = event.target.textContent
+    if(currentquestionindex <= questions.length){
     if (answer === questions[currentquestionindex].answer) {
         currentquestionindex++
         getQuestion()
@@ -131,41 +138,11 @@ function checkAnswer(event) {
       currentquestionindex++ 
       getQuestion()
       feedbackEl.textContent = "Wrong!";
+    }}
+    else{
+        quizDone()
     }
 } 
-
-// var correctAnswer = document.querySelector(".correct-answer")
-// correctAnswer.addEventListener("click",function(event) {
-    
-    
-//     event.preventDefault()
-//     console.log(event)
-
-// function correctAnswer (questions, quizChoices, answerChoices){
-//     var answerContainer = quizChoices.querySelectorAll('answer');
-
-//     var userAnswer = '';
-//     var numCorrect = 0;
-
-//     for (var i=0; i<questions.length; i++){
-//         userAnswer = (answerContainer[i].querySelector('input[name=question'+i+']:checked')||{}).value;
-//         if(userAnswer===questions[i].correctAnswer){
-//             numCorrect++;
-//             answerContainer[i].textContent = "Correct";
-//         }
-//         else{
-//             answerContainer[i].textContent = "Wrong"
-//         }
-//     }
-
-//     submitButton.onclick = function(){
-//         correctAnswer(questions, quizChoices, answerChoices)
-//     }
-
-
-// });
-
-
 
 startButton.addEventListener("click", function() {
     document.querySelector("#start-block").setAttribute("class","hide");
@@ -174,7 +151,37 @@ startButton.addEventListener("click", function() {
     startTimer()
 });
 
+submitButton.addEventListener("click", function() {
+    // console.log(timerCount)
+    var currentinitials = document.querySelector("#initials").value
+//     console.log(document.querySelector("#initials").value)
+var currenthighscores = JSON.parse(localStorage.getItem("highscore")) ||[]
+currenthighscores.push({
+    initials: currentinitials,
+    score: timerCount
+}) 
+localStorage.setItem("highscore", JSON.stringify(currenthighscores))
+document.querySelector("#Finished").classList.remove("show");
+document.querySelector("#Finished").classList.add("hide");
+document.querySelector("#highscore-block").classList.remove("hide");
+for(var i = 0; i < currenthighscores.length; i++){
+    var score = document.createElement("li")
+    score.textContent = currenthighscores.timerCount.scorelist[i]
+}
+})
 
+var resetButton = document.querySelector(".reset-button")
+document.querySelector("#reset-button").classList.remove("show");
+document.querySelector("#Finished").classList.add("hide");
+
+function resetGame() {
+    winCounter = 0;
+    loseCounter = 0;
+    setWins()
+    setLosses()
+}
+resetButton.addEventListener("click", function(){
+});
 
 // funtion start quiz, inside start quiz we wnat to get the question and start the quiz
 // need fucntion to get questions 
