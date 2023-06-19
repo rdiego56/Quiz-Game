@@ -1,5 +1,6 @@
 # Quiz-Game
-![Quiz-Game]
+![Naruto Quiz game](https://github.com/rdiego56/Quiz-Game/assets/128023854/58dfe0bd-7e6c-4321-99f7-bb3270513dba)
+
 For this assignement we were asked to make a quiz game for anything we would like. 
 
 * When prompted with the page you can click start quiz where you and then show a number of questions.
